@@ -61,7 +61,7 @@ def bisection(l, r, deltax):
         # Step 6
         L = r - l
         if L < deltax:
-            return (xm, stats, funw(xm))
+            return xm, stats, funw(xm)
 
 
 def golden_section(l, r, deltax):
@@ -117,11 +117,11 @@ def golden_section(l, r, deltax):
 def newtons(x0, deltax):
     stats = {'steps': 0, 'call_count': 0, 'points': [x0], 'interval': []}
 
-    xinext = x0
+    xinext = x0  # Setting the initial guess for the minimum point.
     while True:
         stats['steps'] += 1
         xi = xinext
-        xinext = xi - (fder(xi, stats) / fsecder(xi, stats))
+        xinext = xi - (fder(xi, stats) / fsecder(xi, stats))  # Newton's method formula.
 
         stats['points'].append(xinext)  # Save a point
         stats['interval'].append(abs(xi - xinext))  # Save interval
