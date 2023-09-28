@@ -1,4 +1,5 @@
 import math
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -195,7 +196,7 @@ def print_results(algo_name: str, res):
 
 def main():
     # Studento numerio sk.: a = 0; b = 6
-    # My function: f(x) = (x^2)^2 / 6) - 1
+    # My function: f(x) = ((x^2)^2 / 6) - 1
     # Derivative: f'(x) = (2x^3) / 3
     # Second derivative: f''(x) = 2x^2
     x0 = 0
