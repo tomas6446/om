@@ -15,7 +15,7 @@ def gradient_descent(f, gradf, start, learning_rate=1, tolerance=0.001):
 
         xi = xi - learning_rate * gradxi  # Find X_i+1 = X_i - gamma * gradf(X_i)
         steps.append(xi)  # stat tracing
-        steps_val.append((start))
+        steps_val.append(start)
 
         if np.linalg.norm(learning_rate * gradxi) < tolerance:
             break
@@ -83,7 +83,7 @@ def steepest_descent(f, gradf, start, tolerance=0.001):
 
         xi = xi - learning_rate * gradxi  # Find X_i+1 = X_i - gamma * gradf(X_i)
         steps.append(xi)  # stat tracing
-        steps_val.append((start))
+        steps_val.append(start)
 
         if np.linalg.norm(learning_rate * gradxi) < tolerance:
             break
