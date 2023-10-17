@@ -5,7 +5,7 @@ import numpy as np
 
 
 def funw(x):
-    return (x ** 2) ** 2 / 6 - 1
+    return (x ** 4) / 6 - 1
 
 
 def f(x, stats):
