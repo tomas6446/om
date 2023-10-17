@@ -12,10 +12,6 @@ def gradf(x):
 
 
 def better_3d_plot(f, points, filename, show=False):
-    # Convert the list of points to a numpy array
-    # points = np.array(data["points"])
-    # points = np.array([p['coords'] for p in data])
-
     # Create a 3D plot
     fig = plt.figure(figsize=(4.5, 4.5))
     ax = fig.add_subplot(111, projection='3d', computed_zorder=False)
@@ -81,8 +77,6 @@ def better_3d_plot(f, points, filename, show=False):
 def configurePlot(ax):
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
-    # ax.spines['bottom'].set_position('zero')
-    # ax.spines['left'].set_position('zero')
     ax.tick_params(axis='both', which='both', length=0)
     ax.xaxis.get_major_ticks()[0].label1.set_visible(False)
 
@@ -100,30 +94,18 @@ def better_contour_plot(points, filename, show=False):
         'val': point[0],
         'num': i + 1
     } for i, point in enumerate(points)]
-    # if (i % 5 == 0 or i == len(points) - 1) and i != 0]
     y_points = [{
         'val': point[1],
         'num': i + 1
     } for i, point in enumerate(points)]
-    # if (i % 5 == 0 or i == len(points) - 1) and i != 0]
 
     x_points_val = [x['val'] for x in x_points]
     y_points_val = [y['val'] for y in y_points]
     ax.plot(x_points_val, y_points_val, 'bo-')
 
-    # for i in range(len(x_points)):
-    #     ax.annotate(x_points[i]['num'],
-    #                 xy=(x_points[i]['val'], y_points[i]['val']),
-    #                 xytext=(7, 0),
-    #                 textcoords='offset points')
-
-    # ax.set_xlim([0.2, 0.6])  # set x-axis limits
-    # ax.set_ylim([0.2, 0.5])  # set y-axis limits
-
     configurePlot(ax)
     ax.set_xlabel('x1')
     ax.set_ylabel('x2')
-    # plt.title(plotTitle, y=1.04)
     if not os.path.exists('figures'):
         os.mkdir('figures')
     plt.savefig("figures/" + filename)
