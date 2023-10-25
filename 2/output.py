@@ -17,9 +17,9 @@ def better_3d_plot(f, points, filename, show=False):
     ax = fig.add_subplot(111, projection='3d', computed_zorder=False)
     # ax.view_init(elev=0, azim=180)
 
-    ax.w_xaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
-    ax.w_yaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
-    ax.w_zaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+    ax.xaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+    ax.yaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
+    ax.zaxis.set_pane_color((1.0, 1.0, 1.0, 0.0))
 
     # Plot the function surface
     X1, X2 = np.meshgrid(np.linspace(0, 1, 50), np.linspace(0, 1, 50))
