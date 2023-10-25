@@ -73,6 +73,7 @@ def shrink(f, points, gamma=0.5):
     return X
 
 
+# When the function's gradient is unavailable or expensive to compute.
 def nelder_mead(f, starting_point, tolerance=0.001):
     # Stat tracing
     triangles = []
