@@ -17,6 +17,7 @@ def gradient_descent(f, gradf, start, learning_rate=1, tolerance=0.001):
         steps.append(xi)  # stat tracing
         steps_val.append(start)
 
+        # ar sukonvergavo algoritmas
         if np.linalg.norm(learning_rate * gradxi) < tolerance:
             break
     return steps, xi, function_uses, steps_val
@@ -73,6 +74,8 @@ def steepest_descent(f, gradf, start, tolerance=0.001):
         gradxi = gradf(xi)  # Find gradient at point X_i
         function_uses += 2
 
+        # function aids process by determining the best step size
+        # at each iteration of the steepest descent method.
         learning_rate, stats = golden_section(
             xi, gradxi, f
         )  # Find gamma such: arg min_gamma >= 0 f(X_i - gamma * gradf(X_i))
@@ -85,6 +88,7 @@ def steepest_descent(f, gradf, start, tolerance=0.001):
         steps.append(xi)  # stat tracing
         steps_val.append(start)
 
+        # ar sukonvergavo algoritmas
         if np.linalg.norm(learning_rate * gradxi) < tolerance:
             break
     return steps, xi, function_uses, stats_additional, steps_val
