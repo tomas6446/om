@@ -38,21 +38,22 @@ def main():
                         res,
                         len(history) - 1,
                         stats_val=stats_val)
-        o.better_3d_plot(f, history, f"gradient_descent_3d_{starting_point}.png")
-        o.better_contour_plot(history, f"gradient_descent_contour_{starting_point}.png")
+        file = f"[{starting_point[0]}, {starting_point[1]}]"
+        o.better_3d_plot(f, history, f"gradient_descent_3d_{file}.png")
+        o.better_contour_plot(history, f"gradient_descent_contour_{file}.png")
 
         print("\nSteepest descent:")
         history, res, function_uses, stats_additional, stats_val = dm.steepest_descent(f, gradf, starting_point)
         o.print_results(function_uses, history, res, len(history) - 1, stats_additional, stats_val)
-        o.better_3d_plot(f, history, f"steepest_descent_3d_{starting_point}.png")
-        o.better_contour_plot(history, f"steepest_descent_contour_{starting_point}.png")
+        o.better_3d_plot(f, history, f"steepest_descent_3d_{file}.png")
+        o.better_contour_plot(history, f"steepest_descent_contour_{file}.png")
 
         print("\nNelder-Mead:")
         res, history, function_uses = nm.nelder_mead(f, starting_point)
         o.print_results(function_uses, history, res, len(history))
         o.better_draw_triangles(
             history + [res],
-            f"nelder_mead_better_triangles_{starting_point}.png",
+            f"nelder_mead_better_triangles_{file}.png",
             present=False)
 
         print("--------------------------------------------------------")

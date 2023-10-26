@@ -63,12 +63,10 @@ def better_3d_plot(f, points, filename, show=False):
     ax.set_ylabel('x2')
     ax.set_zlabel('f(x1, x2)')
 
-    plt.title("I = [0,1]", y=1.04)
-
     # Show the plot
     if not os.path.exists('figures'):
         os.mkdir('figures')
-    plt.savefig("figures/" + filename)
+    plt.savefig("figures/" + filename.replace(" ", ""))
     if show:
         plt.show()
     plt.close()
@@ -108,7 +106,7 @@ def better_contour_plot(points, filename, show=False):
     ax.set_ylabel('x2')
     if not os.path.exists('figures'):
         os.mkdir('figures')
-    plt.savefig("figures/" + filename)
+    plt.savefig("figures/" + filename.replace(" ", ""))
     if show:
         plt.show()
     plt.close()
@@ -125,12 +123,12 @@ def better_draw_triangles(history, filename, present=False, show=False):
         plt.plot(xs, ys, '-o')
 
         if present:
-            plt.savefig(filename)
+            plt.savefig(filename.replace(" ", ""))
             input("Press Enter to continue...")
 
     if not os.path.exists('figures'):
         os.mkdir('figures')
-    plt.savefig("figures/" + filename)
+    plt.savefig("figures/" + filename.replace(" ", ""))
     if show:
         plt.show()
     plt.close()
