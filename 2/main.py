@@ -23,6 +23,10 @@ def main():
     starting_points = np.array([[0, 0], [1, 1], [a / 10, b / 10]])
     o.better_3d_plot(f, starting_points, "starting_points.png")
 
+    print(f([0, 0]))
+    print(f([1, 1]))
+    print(f([0, 0.6]))
+
     for starting_point in starting_points:
         print("--------------------------------------------------------")
         print(f"Starting point is [{starting_point[0]}, {starting_point[1]}]")
