@@ -80,7 +80,7 @@ def optimize(
 
 
 def main():
-    points = [[0, 0, 0], [1, 1, 1], [2 / 10, 6 / 10, 9 / 10]]
+    points = [[0, 0, 0], [1, 1, 1], [3 / 10, 0 / 10, 6 / 10]]
     eqc = [eq_constraint]
     ineqc = [ineq_constraint1, ineq_constraint2, ineq_constraint3]
 
