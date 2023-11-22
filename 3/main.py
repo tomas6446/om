@@ -70,7 +70,7 @@ def optimize(
         # Naudojamas Nelder-Mead algoritmas
         simplex, _, function_calls = nelder_mead(b_wrapped, current_point)
         new_point = simplex[find_best_points_index(simplex)]["coords"]
-        r = r / 2
+        r = r / 2 # r dynaminis pritaikymas
         total_function_calls += function_calls
 
         print(
