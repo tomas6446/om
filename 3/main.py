@@ -4,7 +4,7 @@ import numpy as np
 
 from nelder_mead import nelder_mead, find_best_points_index
 
-
+# Funkcija, kurią bandoma minimizuoti
 def f(x: list[float]) -> float:
     return -1 * x[0] * x[1] * x[2]
 
@@ -25,6 +25,7 @@ def ineq_constraint3(x: list[float]) -> float:
     return -1 * x[2]
 
 
+# Baudos funkcija lygybėms ir nelygybėms
 def penalty(
         x: list[float],
         equality_constraints: list[Callable[[list[float]], float]],
@@ -41,6 +42,7 @@ def penalty(
     return temp_sum[0] + temp_sum[1]
 
 
+# Padidinta tikslinė funkcija su baudos sąlyga
 def b(
         x: list[float],
         r: float,
@@ -50,6 +52,7 @@ def b(
     return f(x) + (1 / r) * penalty(x, equality_constraints, inequality_constraint)
 
 
+# Optimizavimo funkcija naudojant Nelder-Mead algoritmą
 def optimize(
         starting_point: list[float],
         equality_constraints: list[Callable[[list[float]], float]],
@@ -61,7 +64,10 @@ def optimize(
     current_point = starting_point
     print("---------------")
     for i in range(1, 100):
+        # Susapnuojama padidinta tikslinė funkcija optimizacijai
         b_wrapped = lambda x: b(x, r, equality_constraints, inequality_constraints)
+
+        # Naudojamas Nelder-Mead algoritmas
         simplex, _, function_calls = nelder_mead(b_wrapped, current_point)
         new_point = simplex[find_best_points_index(simplex)]["coords"]
         r = r / 2
@@ -71,6 +77,7 @@ def optimize(
             f"Iteracija {i}, dabartinis taškas: {new_point}, baudos funkcijos reikšmė: {b_wrapped(new_point)}, r: {r}"
         )
 
+        # Patikrinama, ar pasiekta konvergencija
         if np.linalg.norm(new_point - current_point) <= 0.001:
             current_point = new_point
             break
