@@ -4,6 +4,7 @@ import numpy as np
 
 from nelder_mead import nelder_mead, find_best_points_index
 
+
 # Funkcija, kurią bandoma minimizuoti
 def f(x: list[float]) -> float:
     return -1 * x[0] * x[1] * x[2]
@@ -70,11 +71,14 @@ def optimize(
         # Naudojamas Nelder-Mead algoritmas
         simplex, _, function_calls = nelder_mead(b_wrapped, current_point)
         new_point = simplex[find_best_points_index(simplex)]["coords"]
-        r = r / 2 # r dynaminis pritaikymas
+        r = r / 2  # r dynaminis pritaikymas
         total_function_calls += function_calls
 
+        f1 = 2 * new_point[0] * new_point[1]
+        f2 = 2 * new_point[0] * new_point[2]
+        f3 = 2 * new_point[1] * new_point[2]
         print(
-            f"Iteracija {i}, dabartinis taškas: {new_point}, baudos funkcijos reikšmė: {b_wrapped(new_point)}, r: {r}"
+            f"Iteracija {i}, dabartinis taškas: {new_point}, fig: ab = {f1}, ac = {f2}, bc = {f3}, baudos funkcijos reikšmė: {b_wrapped(new_point)}, r: {r}"
         )
 
         # Patikrinama, ar pasiekta konvergencija
@@ -83,7 +87,7 @@ def optimize(
             break
         current_point = new_point
 
-    return current_point, total_function_calls
+    return current_point, f"fig: ab = {f1}, ac = {f2}, bc = {f3}", total_function_calls
 
 
 def main():

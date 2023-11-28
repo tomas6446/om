@@ -50,7 +50,7 @@ def main():
 
         print("\nNelder-Mead:")
         res, history, function_uses = nm.nelder_mead(f, starting_point)
-        o.print_results(function_uses, history, res, len(history))
+        o.print_results_nelder(function_uses, history, res, len(history))
         o.better_draw_triangles(
             history + [res],
             f"nelder_mead_better_triangles_{file}.png",

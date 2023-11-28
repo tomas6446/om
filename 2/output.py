@@ -156,3 +156,24 @@ def print_results(function_uses: int,
     print("History:")
     for point in history:
         pprint.pprint(point)
+
+
+def print_results_nelder(function_uses: int,
+                         history: list,
+                         res,
+                         iterations: int,
+                         additional_task_stats: dict = {},
+                         stats_val=[]) -> None:
+    print(f'Objective function was used {function_uses} times.')
+    print(f'Objective function made {iterations} iterations.')
+    print('Algorithm\'s results:')
+    array = res[0]['coords']
+    x1, x2 = array
+    x3 = 1 - x1 - x2
+    res.append([x1, x2, x3])
+    res.append(x1 + x2 + x3)
+    pprint.pprint(res)
+
+    print("History:")
+    for point in history:
+        pprint.pprint(point)

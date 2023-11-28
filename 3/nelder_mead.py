@@ -1,10 +1,11 @@
-import numpy as np
-import math
 import copy
+import math
+
+import numpy as np
 
 
 def generate_points(
-    f, starting_point, alpha=0.5
+        f, starting_point, alpha=0.5
 ):  # Alpha is basically the length of the side of the initial simplex
     x0 = np.array(starting_point)
     n = len(x0)
@@ -28,16 +29,16 @@ def generate_points(
 
 def find_centroid(f, points, n, worst_points_index):
     centroid_coords = (
-        1
-        / n
-        * sum([v["coords"] for i, v in enumerate(points) if i != worst_points_index])
+            1
+            / n
+            * sum([v["coords"] for i, v in enumerate(points) if i != worst_points_index])
     )
     return {"coords": centroid_coords, "value": f(centroid_coords)}
 
 
 def step(f, points, centroid, worst_points_index, alpha):
     new_point_coords = centroid["coords"] + alpha * (
-        centroid["coords"] - points[worst_points_index]["coords"]
+            centroid["coords"] - points[worst_points_index]["coords"]
     )
     return {"coords": new_point_coords, "value": f(new_point_coords)}
 
@@ -99,13 +100,13 @@ def nelder_mead(f, starting_point, tolerance=0.001):
 
         # Try Expansion
         if (
-            xr["value"] <= simplex[find_best_points_index(simplex)]["value"]
+                xr["value"] <= simplex[find_best_points_index(simplex)]["value"]
         ):  # F(x_r) <= F(x^(0))
             xe = step(f, simplex, centroid, worst_points_index, 2)
             function_calls += 1
 
             if (
-                xe["value"] <= simplex[find_best_points_index(simplex)]["value"]
+                    xe["value"] <= simplex[find_best_points_index(simplex)]["value"]
             ):  # F(x_e) <= F(x^(0))
                 simplex[worst_points_index] = xe
             else:
@@ -137,11 +138,11 @@ def nelder_mead(f, starting_point, tolerance=0.001):
                 function_calls += n
 
         if (
-            np.linalg.norm(
-                simplex[find_worst_points_index(simplex)]["coords"]
-                - simplex[find_best_points_index(simplex)]["coords"]
-            )
-            <= tolerance
+                np.linalg.norm(
+                    simplex[find_worst_points_index(simplex)]["coords"]
+                    - simplex[find_best_points_index(simplex)]["coords"]
+                )
+                <= tolerance
         ):
             break
 
