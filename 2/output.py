@@ -144,6 +144,8 @@ def print_results(function_uses: int,
     print(f'Objective function made {iterations} iterations.')
     print('Algorithm\'s results:')
     pprint.pprint(res)
+    print(
+        f"ab = {res[0]}, bc = {res[1]}, ac = {(1 - res[0] - res[1])}, sum = {res[0] + res[1] + (1 - res[0] - res[1])}")
 
     if 'iterations' and 'function_uses' and 'count' in additional_task_stats:
         print(f'Algorithm used {additional_task_stats["count"]} '
@@ -170,8 +172,7 @@ def print_results_nelder(function_uses: int,
     array = res[0]['coords']
     x1, x2 = array
     x3 = 1 - x1 - x2
-    res.append([x1, x2, x3])
-    res.append(x1 + x2 + x3)
+    print(f"ab = {x1}, bc = {x2}, ac = {x3}, sum = {x1 + x2 + x3}")
     pprint.pprint(res)
 
     print("History:")
