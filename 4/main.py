@@ -43,10 +43,10 @@ def adjust_table(
     pivot_row.fval = pivot_row.fval / pivot
     pivot_row.cf = [x / pivot for x in pivot_row.cf]
 
-    # if verbose:
-    #     for row in full_table:
-    #         print(row)
-    #     print("---------")
+    if verbose:
+        for row in full_table:
+            print(row)
+        print("---------")
 
     for i in range(len(full_table)):
         if i == pivot_row_index:
