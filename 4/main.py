@@ -128,15 +128,15 @@ def optimize_linear_program(full_table: [TableRow], var_count: int) -> None:
 
 def print_table(full_table):
     for row in full_table:
-        formatted_row = ' | '.join(f"{val:8.4f}" for val in row.cf)
-        print(f"[{formatted_row}], {row.fval:8.4f}")
+        formatted_row = ' | '.join(f"{val:8.2f}" for val in row.cf)
+        print(f"[{formatted_row}], {row.fval:8.2f}")
 
 
 def print_results(res: [[float], [float], float], true_var_count: int):
     print("\nOptimized Results:")
-    print(f"Point: {' | '.join(f'{val:8.4f}' for val in res[0][:true_var_count])}")
+    print(f"Point: {' | '.join(f'{val:8.2f}' for val in res[0][:true_var_count])}")
     print(f"Base: {' | '.join(f'x{index}' for index in res[1])}")
-    print(f"Optimum: {res[2]:8.4f}")
+    print(f"Optimum: {res[2]:8.2f}")
     print("=====================================")
 
 
