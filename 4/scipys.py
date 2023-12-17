@@ -1,5 +1,6 @@
-from scipy.optimize import linprog
 import warnings
+
+from scipy.optimize import linprog
 
 # Coefficients of the objective function
 c = [2, -3, 0, -5]
@@ -45,17 +46,17 @@ res = linprog(
 print("Optimal value:", res.fun)
 print("x:", res.x)
 
-# Right-hand side of the inequality constraints
-b = [0, 3, 9]
-
-# Solve the problem
-res = linprog(
-    c,
-    A_ub=A,
-    b_ub=b,
-    bounds=[x0_bounds, x1_bounds, x2_bounds, x3_bounds],
-    method="simplex",
-)
-
-print("Optimal value:", res.fun)
-print("x:", res.x)
+# # Right-hand side of the inequality constraints
+# b = [0, 3, 9]
+#
+# # Solve the problem
+# res = linprog(
+#     c,
+#     A_ub=A,
+#     b_ub=b,
+#     bounds=[x0_bounds, x1_bounds, x2_bounds, x3_bounds],
+#     method="simplex",
+# )
+#
+# print("Optimal value:", res.fun)
+# print("x:", res.x)

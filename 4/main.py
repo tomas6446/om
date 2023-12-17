@@ -1,6 +1,6 @@
 import numpy as np
 
-verbose = False
+verbose = True
 
 
 class TableRow:
@@ -43,10 +43,10 @@ def adjust_table(
     pivot_row.fval = pivot_row.fval / pivot
     pivot_row.cf = [x / pivot for x in pivot_row.cf]
 
-    if verbose:
-        for row in full_table:
-            print(row)
-        print("---------")
+    # if verbose:
+    #     for row in full_table:
+    #         print(row)
+    #     print("---------")
 
     for i in range(len(full_table)):
         if i == pivot_row_index:
@@ -75,9 +75,9 @@ def optimize_linear_program(full_table: [TableRow], var_count: int) -> None:
 
     while not all(num >= 0 for num in function_row.cf):
         if verbose:
+            print("=====================================")
             print("Current table:")
-            for row in full_table:
-                print(row)
+            print_table(full_table)
 
         pivot_col_index = np.argmin(function_row.cf)
         if verbose:
@@ -96,7 +96,8 @@ def optimize_linear_program(full_table: [TableRow], var_count: int) -> None:
         adjust_table(full_table, pivot_row_index, pivot_col_index)
 
         if verbose:
-            input("Waiting for input. Press any key...")
+            print("=====================================")
+            input("Waiting for input. Press any key...\n\n")
 
     column_sums = [
         sum(row.cf[i] for row in full_table) for i in range(len(full_table[0].cf))
@@ -110,13 +111,33 @@ def optimize_linear_program(full_table: [TableRow], var_count: int) -> None:
             if row.cf[i] == 1:
                 final_vars[i] = row.fval
 
+    if verbose:
+        print("=====================================")
+        print("Final Tableau:")
+        print_table(full_table)
+
+    print("=====================================")
+    print("Final Variables: ")
+    print(' | '.join(f"x{i + 1} = {val:8.4f}" for i, val in enumerate(final_vars[:var_count])))
+
+    print(f"\nBasis Indices: {', '.join(f'x{index + 1}' for index in base_indexes)}")
+    print(f"Optimum Value: {-function_row.fval:8.4f}")
+
     return final_vars, [x + 1 for x in base_indexes], -function_row.fval
 
 
+def print_table(full_table):
+    for row in full_table:
+        formatted_row = ' | '.join(f"{val:8.4f}" for val in row.cf)
+        print(f"[{formatted_row}], {row.fval:8.4f}")
+
+
 def print_results(res: [[float], [float], float], true_var_count: int):
-    print(f"Point: {res[0][0:true_var_count]}")
-    print(f"Base: {res[1]}")
-    print(f"Optimum: {res[2]}")
+    print("\nOptimized Results:")
+    print(f"Point: {' | '.join(f'{val:8.4f}' for val in res[0][:true_var_count])}")
+    print(f"Base: {' | '.join(f'x{index}' for index in res[1])}")
+    print(f"Optimum: {res[2]:8.4f}")
+    print("=====================================")
 
 
 def main() -> None:
@@ -129,7 +150,7 @@ def main() -> None:
         TableRow([2, 4, 0, 0, 0, 1, 0], 10),
         TableRow([0, 0, 1, 1, 0, 0, 1], 3),
     ]
-
+    print("=====================================")
     print("Optimizing the generic task:")
     print_results(optimize_linear_program(task, 7), 4)
 
@@ -140,18 +161,9 @@ def main() -> None:
         TableRow([0, 0, 1, 1, 0, 0, 1], 6),
     ]
 
+    print("\n\n=====================================")
     print("Optimizing the personal task:")
     print_results(optimize_linear_program(task_personal, 7), 4)
-
-    another_test = [
-        TableRow([2, -3, 0, -5, 0, 0, 0], 0),
-        TableRow([-1, 1, -1, -1, 1, 0, 0], 0),
-        TableRow([2, 4, 0, 0, 0, 1, 0], 3),
-        TableRow([0, 0, 1, 1, 0, 0, 1], 9),
-    ]
-
-    print("Optimizing the test task:")
-    print_results(optimize_linear_program(another_test, 7), 4)
 
 
 if __name__ == "__main__":

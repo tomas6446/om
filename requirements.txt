@@ -1,0 +1,8 @@
+pandas
+seaborn
+scipy
+jupyter
+openpyxl
+scikit-learn
+umap-learn
+setuptools
